@@ -13,24 +13,24 @@ Exclusiveos: linux
 # but we're waiting for those to be feature-complete.
 ExclusiveArch: %{ix86} x86_64 ppc ppc64
 
-Source0: https://github.com/dyninst/dyninst/archive/v%{version}/dyninst-%{version}.tar.gz
+Source0: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/dyninst-%{version}.tar.gz
 # Explicit version since it does not match the source version
-Source1: https://github.com/dyninst/testsuite/archive/v9.3.0/testsuite-9.3.0.tar.gz
+Source1: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/testsuite-9.3.0.tar.gz
 
-Patch1: testsuite-9.3.0-junit-nullptr.patch
-Patch2: addrtranslate-sysv.patch
-Patch3: Object-elf.patch
-Patch4: dyninst-9.3.2-sstream.patch
-Patch5: dyninst-9.3.2-gcc8.patch
-Patch6: dyninst-9.3.2-glibc-rpc.patch
-Patch7: shared-cmake.patch
+Patch1: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/testsuite-9.3.0-junit-nullptr.patch
+Patch2: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/addrtranslate-sysv.patch
+Patch3: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/Object-elf.patch
+Patch4: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/dyninst-9.3.2-sstream.patch
+Patch5: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/dyninst-9.3.2-gcc8.patch
+Patch6: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/dyninst-9.3.2-glibc-rpc.patch
+Patch7: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/shared-cmake.patch
 
 %global dyninst_base dyninst-%{version}
 # Explicit version since it does not match the source version
 %global testsuite_base testsuite-9.3.0
 
 
-Source3: https://www.prevanders.net/libdwarf-20170416.tar.gz
+Source3: https://raw.githubusercontent.com/NewsCentOS7/dyninst/refs/heads/main/libdwarf-20170416.tar.gz
 BuildRequires: zlib-devel
 # XXX: temporarily bundled
 # BuildRequires: %{scl_prefix}libdwarf-devel >= 20111030
@@ -111,13 +111,13 @@ making sure that dyninst works properly.
 %setup -q -n %{name}-%{version} -c
 %setup -q -T -D -a 1
 
-%patch1 -p0 -b .template-export
-%patch2 -p0 -b .sysv
-%patch3 -p0 -b .objelf
-%patch4 -p0 -b .sstream
-%patch5 -p1 -b .gcc8
-%patch6 -p1 -b .glibc-rpc
-%patch7 -p1 -b .shcmake
+%patch -P 1 -p0 -b .template-export
+%patch -P 2 -p0 -b .sysv
+%patch -P 3 -p0 -b .objelf
+%patch -P 4 -p0 -b .sstream
+%patch -P 5 -p1 -b .gcc8
+%patch -P 6 -p1 -b .glibc-rpc
+%patch -P 7 -p1 -b .shcmake
 
 # XXX: bundled libdwarf
 %setup -q -T -D -b 3
