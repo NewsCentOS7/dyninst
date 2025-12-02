@@ -1,0 +1,13 @@
+# BZ1503116 possible soname clashes between base rhel- and devtoolset- dyninst 
+
+--- ./dyninst-9.3.2/cmake/shared.cmake.sv	2018-01-04 00:08:30.309490754 -0500
++++ ./dyninst-9.3.2/cmake/shared.cmake	2018-01-03 22:21:00.660870105 -0500
+@@ -7,7 +7,7 @@
+ 
+ add_definitions(-DBOOST_ALL_NO_LIB=1)
+ set (SOVERSION "${DYNINST_MAJOR_VERSION}.${DYNINST_MINOR_VERSION}")
+-set (LIBVERSION "${SOVERSION}.${DYNINST_PATCH_VERSION}")
++set (LIBVERSION "dts.${SOVERSION}.${DYNINST_PATCH_VERSION}")
+ set (DYNINST_VERSION "${LIBVERSION}")
+ 
+ if(CMAKE_CONFIGURATION_TYPES)
